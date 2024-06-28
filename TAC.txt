@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <string.h>
+
+void generateTAC(char *expr) {
+    char tempVar[10];
+    int tempCount = 1;
+    
+    char var1, var2, var3, op1, op2;
+    int i = 0;
+    
+     sscanf(expr, "%c = %c %c %c %c %c", &var1, &var2, &op1, &var3, &op2, &var3);
+    
+     snprintf(tempVar, sizeof(tempVar), "t%d", tempCount++);
+    printf("%s = %c %c %c\n", tempVar, var3, op2, var3);
+     snprintf(tempVar, sizeof(tempVar), "t%d", tempCount++);
+    printf("%s = %c %c t1\n", tempVar, var2, op1);
+    
+    printf("%c = t2\n", var1);
+}
+
+int main() {
+    char expr[] = "a = b + c * d";
+    printf("Expression: %s\n", expr);
+    printf("Three-Address Code:\n");
+    generateTAC(expr);
+    return 0;
+}
